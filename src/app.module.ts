@@ -4,12 +4,12 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
+import { Restaurant } from './restaurants/entities/restaurant.entity';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 // const server = new ApolloWerver ({
 //     tpyeDefs,
 //     resolvers
 //  }) 이부분은 GraphQLModule.forRoot<ApolloDriverConfig>({ driver: ApolloDriver }) 이렇게 nestJS방식대로 작동한다
-
 
 // Joi는 환경변수를 유효성 체크 해주는 라이브러리
 @Module({
@@ -34,7 +34,7 @@ import { RestaurantsModule } from './restaurants/restaurants.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [],
+      entities: [Restaurant],
       synchronize: true,
       logging: true,
     }),

@@ -1,5 +1,6 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { CreateRestaurantDto } from './dtos/create-restaurant.dto';
+import { updateRestaurantDto } from './dtos/update-restaurant.dto';
 import { Restaurant } from './entities/restaurant.entity';
 import { RestaurantService } from './restaurants.service';
 
@@ -13,7 +14,23 @@ export class RestaurantResolver {
   }
 
   @Mutation(() => Boolean)
-  createRestaurant(@Args() createRestaurantDto: CreateRestaurantDto): boolean {
+  async createRestaurant(
+    @Args('input') createRestaurantDto: CreateRestaurantDto,
+  ): Promise<boolean> {
+    try {
+      await this.restaurantService.createRestaurant(createRestaurantDto);
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
+  @Mutation((returns) => Boolean)
+  async updateRestaurant(
+    //Dto에서 InputType을 사용할 경우 Args에 이름을 입력해줘야한다
+    @Args('input') updateRestaurantDto: updateRestaurantDto,
+  ) {
     return true;
   }
 }

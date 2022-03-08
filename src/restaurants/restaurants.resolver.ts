@@ -30,7 +30,13 @@ export class RestaurantResolver {
   async updateRestaurant(
     //Dto에서 InputType을 사용할 경우 Args에 이름을 입력해줘야한다
     @Args('input') updateRestaurantDto: updateRestaurantDto,
-  ) {
-    return true;
+  ): Promise<boolean> {
+    try {
+      await this.restaurantService.updateRestaurant(updateRestaurantDto);
+      return true;
+    } catch (e) {
+      console.log('error ->', e);
+      return false;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Field } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
@@ -7,6 +7,7 @@ import {
 
 // 기본적으로 공유되는 모든 것을 적용 app 에서 공유하는 모든 것들
 // 만든 모든 entities 를 사용할 수 있다
+@ObjectType()
 export class CoreEntity {
   @PrimaryGeneratedColumn() // default 값
   @Field(() => Number)
